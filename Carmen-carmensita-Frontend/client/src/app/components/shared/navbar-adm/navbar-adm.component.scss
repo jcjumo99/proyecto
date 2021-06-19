@@ -1,0 +1,32 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.header-nav{
+    display: flex;
+    padding-left: 1%;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header-menu span:nth-child(1){
+    padding: 0 25px;
+    color: #58585A;
+}
+.header-menu span:nth-child(1) i{
+    padding: 0 10px!important;
+    color: #58585A;
+    font-size: 18px;
+}
+.header-menu span:nth-child(1) a{
+    color: #58585A;
+}
+.fas{
+    padding: 0 25px;
+    color: #F89C1B;
+    font-size: 22px;
+}

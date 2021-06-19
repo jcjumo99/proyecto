@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+<div class="pt-4"></div>
+<div class="pt-4"></div>
+<div class="pt-4"></div>
+<div class="pt-4"></div>
+<div class="col-lg-10 mx-auto">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>Hola {{users.first_name}}</h3>
+            </div>
+            <div class="col-lg-4 text-right"><a class="btn btn-primary btn-sm" data-toggle="modal"
+                    data-target="#exampleModal"><i class="text-white fa fa-user"></i></a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Número de orden</th>
+                    <th scope="col">Estado de servicio</th>
+                    <th scope="col">Monto Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let us of listOrden; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{us.code}}</td>
+                    <td *ngIf="us.state === '1'"><span class="badge badge-success">En proceso</span></td>
+                    <td *ngIf="us.state === '2'"><span class="badge badge-primary">Enviando</span></td>
+                    <td *ngIf="us.state === '3'"><span class="badge badge-danger">Finalizado</span></td>
+                    <td *ngIf="us.state === '4'"><span class="badge badge-secondary">Orden Cancelada</span></td>
+                    <td>S/. {{us.monto}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mis datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 pt-4">
+                    <div class="form-group row">
+                        <div class="col-sm-6 md-input">
+                            <input class="md-form-input" type="text" [(ngModel)]="users.first_name" required=""
+                                name="first_name">
+                            <span class="highlight"></span>
+                            <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Nombres</label>
+                        </div>
+                        <div class="col-sm-6 md-input">
+                            <input class="md-form-input" type="text" [(ngModel)]="users.last_name" required=""
+                                name="last_name">
+                            <span class="highlight"></span>
+                            <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Apellidos</label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-6 md-input">
+                            <input class="md-form-input" type="text" autocomplete="new-password"
+                                [(ngModel)]="users.email" required="" name="email">
+                            <span class="highlight"></span>
+                            <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Correo</label>
+
+                        </div>
+                        <div class="col-sm-6 md-input">
+                            <input class="md-form-input" type="number" maxlength="9" autocomplete="new-password"
+                                [(ngModel)]="users.phone" required="" name="phone">
+                            <span class="highlight"></span>
+                            <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Teléfono</label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="updateUser()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>

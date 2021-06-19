@@ -1,0 +1,123 @@
+<app-navbar></app-navbar>
+
+<!--Imagen de Cabecera-->
+<img style="margin-top: 90px; height: 50px; width: 100%; object-fit: cover;" class="img-fluid"
+    src="./assets/cabecera.png" alt="" />
+<!--Fin Imagen de Cabecera-->
+<!--Servicio-->
+<div class="container cestaContent">
+    <div class="dataForm">
+        <form class="m-4 form-datos">
+            <div class="mb-4">
+                <span class="title-form">Datos personales</span>
+                <span class="pl-4"><a class="link-call" style="cursor: pointer;" data-toggle="modal"
+                        data-target="#staticBackdrop">Ya eres cliente? Ingresar con mi usuario</a></span>
+            </div>
+            <div class="pt-3"></div>
+            <div class="form-group row">
+                <div class="col-sm-6 md-input">
+                    <input class="md-form-input" type="text" [(ngModel)]="users.first_name" required=""
+                        name="first_name">
+                    <span class="highlight"></span>
+                    <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Nombres</label>
+                </div>
+                <div class="col-sm-6 md-input">
+                    <input class="md-form-input" type="text" [(ngModel)]="users.last_name" required="" name="last_name">
+                    <span class="highlight"></span>
+                    <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Apellidos</label>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-sm-6 md-input">
+                    <input class="md-form-input" type="number" maxlength="9" autocomplete="new-password"
+                        [(ngModel)]="users.phone" required="" name="phone">
+                    <span class="highlight"></span>
+                    <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Teléfono</label>
+
+                </div>
+            </div>
+            <div class="mb-4">
+                <span class="title-form">Datos para envío o recojo</span>
+            </div>
+            <div class="pt-3"></div>
+            <div class="form-group row">
+                <div class="col-sm-12 md-input pb-2">
+                    <input class="md-form-input" type="text" autocomplete="new-password" [(ngModel)]="address"
+                        required="" name="address">
+                    <span class="highlight"></span>
+                    <label class="label2"><img src="assets/icons/edit.svg" width="12" alt=""> Direccion</label>
+                </div>
+                <div class="col-sm-12 md-input">
+                    <textarea class="md-form-input" required placeholder="Nota de envio o recojo" [(ngModel)]="detail"
+                        name="detail"></textarea>
+                </div>
+                <div class="col-sm-12 md-input">
+                    <select class="md-form-input" [(ngModel)]="type_delivery" name="type_delivery">
+                        <option value="2">Envío</option>
+                        <option value="3">Recojo y envío</option>
+                        <option value="4">Ninguno</option>
+                    </select>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="cestaDetail">
+
+        <div class="table-responsive">
+
+            <div class="card" *ngIf="cestaLenght">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let s of listCesta; let i = index;">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{s.title}}</td>
+                            <td>S/. {{s.price}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="card p-4" *ngIf="!cestaLenght">
+                Cesta vacía
+            </div>
+        </div>
+
+        <div class="precioTotal">
+            <h4>Precio:</h4>
+            <h5>S/ {{sumCesta}}</h5>
+        </div>
+        <div class="pt-4">
+            <p style="font-style:italic;font-size: 10px;">El pago se emitirá solo en efectivo</p>
+        </div>
+        <div class="btnSide">
+            <input type="button" class="btn btn-solicitud mb-2" value="Solicitar Orden" (click)="addServicesUser()">
+            <button (click)="cleanCesta()" class="btn btn-success btn-light"><i class="fa fa-trash"></i> Limpiar
+                cesta</button>
+
+            <a href="#" class="pt-2 link-call">Volver a productos</a>
+        </div>
+
+
+
+    </div>
+
+</div>
+<!--Fin Servicio-->
+<div class="servicesContent">
+    <app-servicios></app-servicios>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,197 @@
+<div class="bg-adm">
+  <header>
+    <app-navbar-adm></app-navbar-adm>
+  </header>
+  <div class="container-home">
+    <div class="sidebar-left">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="cuerpo p-4 animated zoomInUp">
+      <div class="m-4 box-header">
+        <span class="title-form">Listado de pedidos</span>
+      </div>
+      <div class="m-4">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control" (keyup)="search($event.target.value)" placeholder="Buscar..."
+                  aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <!-- <mat-paginator [length]="listPuntos.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+                (page)="handlePage($event)">
+              </mat-paginator> -->
+            </div>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Email</th>
+              <th scope="col">Fecha Solicitud</th>
+              <th scope="col">Tipo de delivery</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let us of listUserServices| paginate: { itemsPerPage: 5, currentPage: p }">
+              <td>{{us.code}}</td>
+              <td>{{us.first_name + ' ' + us.last_name }}</td>
+              <td>{{us.email}}</td>
+              <td>{{us.date_start}}</td>
+              <td *ngIf="us.type_delivery === 1">Recojo</td>
+              <td *ngIf="us.type_delivery === 2">Envío</td>
+              <td *ngIf="us.type_delivery === 3">Recojo y envío</td>
+              <td *ngIf="us.type_delivery === 4">Ninguno</td>
+              <td *ngIf="us.state === '1'"><span class="badge badge-success">En proceso</span></td>
+              <td *ngIf="us.state === '2'"><span class="badge badge-primary">Enviando</span></td>
+              <td *ngIf="us.state === '3'"><span class="badge badge-danger">Finalizado</span></td>
+              <td *ngIf="us.state === '4'"><span class="badge badge-secondary">Orden Cancelada</span></td>
+              <td class="df-fr">
+                <div style="cursor: pointer" data-toggle="modal" (click)="codeId(us.code_complete)"
+                  data-target="#modalActualizarEstado"> <img src="assets/icons/edit.svg" width="12" alt=""> <span
+                    class="ml-2 asignarPriv">Actualizar
+                    Estado</span></div>
+                <div style="cursor: pointer" data-toggle="modal" (click)="getServicesCode(us.code_complete)"
+                  data-target="#modalVerDetalle"> <img src="assets/icons/search.svg" width="12" alt=""> <span
+                    class="ml-2 asignarPriv">Ver Detalles</span></div>
+                <!--<div style="cursor: pointer" data-toggle="modal" data-target="#modalGenerateDelivery"> <img
+                    src="assets/icons/edit.svg" width="12" alt=""> <span class="ml-2 asignarPriv">Generar orden delivery
+                    </span></div>-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <!--
+        <pagination-controls (pageChange)="pages = $event" previousLabel="Atrás" nextLabel="Siguiente">
+        </pagination-controls>
+        -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Modal Generate delivery-->
+<div class="modal fade" id="modalGenerateDelivery" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+        style="align-self: flex-end; margin-top: 2%; margin-right: 3%;">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div class="row justify-content-around">
+          <div class="col-12">
+            <h4 style="color: #2b6ca3; margin-bottom: 20px;">Generar delivery</h4>
+            <div class="form-group">
+              <input class="form-control" style="margin-bottom: 20px;" type="text" placeholder="Direccion de entrega" />
+              <select class="form-control" name="" id="">
+                <option value="">Motorizado - Jose Perez</option>
+                <option value="">Motorizado - Martin Salas</option>
+                <option value="">Motorizado - Roberto Salas</option>
+              </select>
+              <br>
+              <button type="button" class="btn mb-2" style="width: 100%;background-color: #2b6ca3;color: white;">
+                Generar
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--fin Generate delivery-->
+
+<!--Modal Ver detalle-->
+<div class="modal fade" id="modalVerDetalle" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+        style="align-self: flex-end; margin-top: 2%; margin-right: 3%;">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div class="row justify-content-around">
+          <div class="col-12">
+            <h4 style="color: #2b6ca3; margin-bottom: 20px;">Ver detalle de Orde de pedido</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">producto</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Detalles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let us of dataService">
+                    <th scope="row">{{us.first_name}} {{us.last_name}}</th>
+                    <td>{{us.title}}</td>
+                    <td>{{us.address}}</td>
+                    <td>{{us.detail}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--fin Generate delivery-->
+
+<!--Modal actualizar estado-->
+<div class="modal fade" id="modalActualizarEstado" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+        style="align-self: flex-end; margin-top: 2%; margin-right: 3%;">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div class="row justify-content-around">
+          <div class="col-12">
+            <h4 style="color: #2b6ca3; margin-bottom: 20px;">Actualizar Orden de pedido</h4>
+            <div class="form-group">
+              <textarea class="form-control" style="margin-bottom: 20px;" type="text"
+                placeholder="Nota de actualizacion"></textarea>
+              <select class="form-control" name="" id="" [(ngModel)]="state_service">
+                <option value="1">En Proceso</option>
+                <option value="2">Enviado</option>
+                <option value="3">Finalizado</option>
+                <option value="4">Orden Cancelada</option>
+              </select>
+              <br>
+              <button type="button" (click)="updateServices()" class="btn mb-2"
+                style="width: 100%;background-color: #2b6ca3;color: white;">
+                Actualizar orden
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Fin actualizar estado-->

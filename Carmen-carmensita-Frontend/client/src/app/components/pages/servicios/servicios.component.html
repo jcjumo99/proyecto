@@ -1,0 +1,39 @@
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v7.0&appId=372502656956436&autoLogAppEvents=1"
+  nonce="bmVWIlLY"></script>
+
+<!--Servicios-->
+<div class="container mt-4">
+
+  <div class="content-total">
+    <div class="servicios-content">
+      <div>
+        <h1>Productos/especies que tenemos para ti</h1>
+        <hr>
+      </div>
+      <div class="item-servicios" *ngFor="let s of listService; let i = index;">
+        <div class="card shadow text-center">
+          <div class="card-header" style="padding: 0px;">
+            <a [routerLink]="['/detalle-servicio/'+s.servicesId]">
+              <img class="card-img" src="{{URLimage + s.image}}" alt="" />
+            </a>
+          </div>
+          <div class="card-img-top">
+            <h5 class="card-title" style="margin-top: 10px;">
+              {{ s.title }}
+            </h5>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="sidebar-landing">
+
+
+
+
+    </div>
+
+    <!--Fin Servicios-->

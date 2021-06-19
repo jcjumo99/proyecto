@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+
+<!--Imagen de Cabecera-->
+<img style="margin-top: 90px; height: 70px; width: 100%; object-fit: cover;" class="img-fluid"
+  src="./assets/cabecera.png" alt="" />
+<!--Fin Imagen de Cabecera-->
+<!--Servicio-->
+<div class="container detailService">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="card text-center">
+        <img class="card-img" src="{{URLimage + services.image}}" alt="" />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="servicioDetalle">
+        <h2>Producto: {{ services.title }}</h2>
+        <p style="text-align: justify;">
+          {{ services.description }}
+        </p>
+      </div>
+      <div class="pt-4">
+        <p style="font-style:italic;font-size: 14px;color:#969393">El precio es un estimado,a la cantidad de kilos y del
+          tipo de pescado</p>
+      </div>
+      <div class="precioServicio">
+
+        <h4>Precio:</h4>
+
+        <h5>S/ {{ services.price }}</h5>
+
+      </div>
+      <div class="sideButtons">
+        <button type="button" (click)="requestService(services.servicesId)" class="btn btn-solicitud">
+          Agregar a la cesta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Fin Servicio-->
+<div class="servicesContent">
+  <app-servicios></app-servicios>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,66 @@
+<div class="bg-adm">
+  <header>
+    <app-navbar-adm></app-navbar-adm>
+  </header>
+  <div class="container-home">
+    <div class="sidebar-left">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="cuerpo p-4 animated zoomInUp">
+      <div class="m-4 box-header">
+        <span class="title-form">Listado de Órdenes de delivery</span>
+      </div>
+      <div class="m-4">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control"  placeholder="Buscar..."
+                  aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <!-- <mat-paginator [length]="listPuntos.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+                (page)="handlePage($event)">
+              </mat-paginator> -->
+            </div>
+          </div>
+        </div>
+        <table  class="table">
+          <thead>
+            <tr>
+              <th scope="col">Orden de pedido</th>
+              <th scope="col">Fecha Solicitud</th>
+              <th scope="col">Tipo Delivery</th>
+              <th scope="col">Tipo Servicio</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>132323</td>
+              <td>10/03/12</td>
+              <td>Recojo y Envío</td>
+              <td>Lavado al agua</td>
+              <td>No completado</td>
+              <td class="df-fr">
+                <div style="cursor: pointer" data-toggle="modal" data-target="#newUser"> <img
+                    src="assets/icons/edit.svg" width="12" alt=""> <span class="ml-2 asignarPriv">Actualizar Estado</span></div>
+                    <div style="cursor: pointer" data-toggle="modal" data-target="#newUser"> <img
+                      src="assets/icons/edit.svg" width="12" alt=""> <span class="ml-2 asignarPriv">Ver detalle</span></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--
+        <pagination-controls (pageChange)="pages = $event" previousLabel="Atrás" nextLabel="Siguiente">
+        </pagination-controls>
+        -->
+      </div>
+    </div>
+  </div>
+</div>
